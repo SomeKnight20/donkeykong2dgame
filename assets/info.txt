@@ -1,9 +1,0 @@
-original resolution
-224×256
-
-sprites
-16x16
-
-background tiles
-8x8
-
