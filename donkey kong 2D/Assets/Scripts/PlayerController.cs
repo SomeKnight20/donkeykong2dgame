@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool grounded;
     private bool canClimb = false;
     private bool isClimbing = false;
+    private bool isDead = false;
 
     float horizontalInput;
     float verticalInput;
@@ -27,68 +28,72 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (grounded)
+        if (!isDead)
         {
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-        }
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-
-        if (Input.GetKeyDown("space")
-            && grounded
-            && !isClimbing)
-        {
-            player.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
-
-        
-        movement.x = horizontalInput * moveSpeed;
-        movement.y = 0;
-        if (canClimb)
-        {
-            if (verticalInput != 0)
+            if (grounded)
             {
-                isClimbing = true;
+                horizontalInput = Input.GetAxisRaw("Horizontal");
             }
-            if (isClimbing)
+            verticalInput = Input.GetAxisRaw("Vertical");
+
+
+            if (Input.GetKeyDown("space")
+                && grounded
+                && !isClimbing)
             {
-                movement.y = verticalInput * moveSpeed;
-                player.velocity = Vector2.zero;
-                if (!grounded)
+                player.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+
+
+            movement.x = horizontalInput * moveSpeed;
+            movement.y = 0;
+            if (canClimb)
+            {
+                if (verticalInput != 0 && grounded)
                 {
-                    movement.x = 0;
-                    horizontalInput = 0;
+                    isClimbing = true;
                 }
-                transform.localScale = new Vector3(Mathf.Round(Mathf.Abs(player.position.y)%1)*2-1, 1, 1);
+                if (isClimbing)
+                {
+                    player.velocity = Vector2.zero;
+                    player.isKinematic = true;
+                    movement.y = verticalInput * moveSpeed;
+                    if (!grounded)
+                    {
+                        movement.x = 0;
+                        horizontalInput = 0;
+                    }
+                    transform.localScale = new Vector3(Mathf.Round(Mathf.Abs(player.position.y) % 1) * 2 - 1, 1, 1);
+                }
             }
-        }
+            if (!isClimbing)
+            {
+                player.isKinematic = false;
+            }
 
 
-        if (horizontalInput > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (horizontalInput < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
-        animator.SetFloat("speed", Mathf.Abs(horizontalInput));
-        if (!isClimbing)
-        {
+            if (horizontalInput > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (horizontalInput < 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            animator.SetFloat("speed", Mathf.Abs(horizontalInput));
+            animator.SetBool("isClimbing", isClimbing);
             animator.SetBool("grounded", grounded);
         }
-        else
-        {
-            animator.SetBool("grounded", true);
-            
-        }
-
-        animator.SetBool("isClimbing", isClimbing);
+        animator.SetBool("isDead", isDead);
     }
 
     void FixedUpdate()
     {
-        player.position += movement * Time.fixedDeltaTime;
+        if (!isDead)
+        {
+            player.position += movement * Time.fixedDeltaTime;
+        }
+        
         //player.MovePosition(player.position + movement * Time.fixedDeltaTime);
     }
 
@@ -125,9 +130,17 @@ public class PlayerController : MonoBehaviour
         {
             canClimb = true;
         }
-        if (collision.gameObject.tag == "Platform")
+        //if (collision.gameObject.tag == "Platform")
+        //{
+        //    isClimbing = false;
+        //}
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Barrel")
         {
-            isClimbing = false;
+            isDead = true;
+            Destroy(player);
         }
     }
 }
