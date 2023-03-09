@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8179361020452162601}
   moveSpeed: 4
+  isGoingRight: 1
 --- !u!212 &4417175206580221653
 SpriteRenderer:
   m_ObjectHideFlags: 0

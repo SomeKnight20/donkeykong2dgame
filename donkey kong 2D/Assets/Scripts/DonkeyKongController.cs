@@ -17,14 +17,12 @@ public class DonkeyKongController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("dk_throw"))
         {
             //if (animator.GetCurrentAnimatorStateInfo(0).length > animator.GetCurrentAnimatorStateInfo(0).normalizedTime)
             //{
             //    Instantiate(barrelPrefab, throwPoint.position, throwPoint.rotation);
             //}
-            
         }
         else
         {
