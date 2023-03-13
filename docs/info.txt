@@ -7,3 +7,14 @@ sprites
 background tiles
 8x8
 
+
+
+
+tutorial for the ladder
+https://pavcreations.com/climbing-ladders-mechanic-in-unity-2d-platformer-games/
+https://www.youtube.com/watch?v=xoK0mPISY08
+
+
+slopes
+https://www.youtube.com/watch?v=cwcC2tIKObU
+https://www.youtube.com/watch?v=kVBABNw1jaE

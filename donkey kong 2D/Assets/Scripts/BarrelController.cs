@@ -48,7 +48,7 @@ public class BarrelController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Bound")
+        if (collision.gameObject.CompareTag("Bound"))
         {
             isGoingRight = !isGoingRight;
         }
