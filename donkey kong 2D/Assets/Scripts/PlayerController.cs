@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameManager gameManager;
     public Animator animator;
 
     private Rigidbody2D player;
@@ -56,7 +57,8 @@ public class PlayerController : MonoBehaviour
                 if (isClimbing)
                 {
                     player.velocity = Vector2.zero;
-                    player.isKinematic = true;
+                    // player.isKinematic = true;
+                    player.gravityScale = 0;
                     movement.y = verticalInput * moveSpeed;
                     if (!grounded)
                     {
@@ -68,7 +70,8 @@ public class PlayerController : MonoBehaviour
             }
             if (!isClimbing)
             {
-                player.isKinematic = false;
+                // player.isKinematic = false;
+                player.gravityScale = 0.9f;
             }
 
 
@@ -99,13 +102,13 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.CompareTag("Platform"))
         {
             grounded = true;
         }
         if (isClimbing && !grounded)
         {
-            if (collision.gameObject.tag == "Ladder")
+            if (collision.gameObject.CompareTag("Ladder"))
             {
                 player.position = new Vector2(collision.transform.position.x, player.position.y);
             }
@@ -114,11 +117,11 @@ public class PlayerController : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.CompareTag("Platform"))
         {
             grounded = false;
         }
-        if (collision.gameObject.tag == "Ladder")
+        if (collision.gameObject.CompareTag("Ladder"))
         {
             canClimb = false;
             isClimbing = false;
@@ -126,21 +129,18 @@ public class PlayerController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ladder")
+        if (collision.gameObject.CompareTag("Ladder"))
         {
             canClimb = true;
         }
-        //if (collision.gameObject.tag == "Platform")
-        //{
-        //    isClimbing = false;
-        //}
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Barrel")
+        if (collision.gameObject.CompareTag("Barrel"))
         {
             isDead = true;
             Destroy(player);
+            gameManager.Lose();
         }
     }
 }
