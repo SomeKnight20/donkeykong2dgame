@@ -15,6 +15,7 @@ public class BarrelController : MonoBehaviour
 
     private bool isFalling = false;
     public bool isGoingRight = true;
+    
 
     // Start is called before the first frame update
     void Start()
