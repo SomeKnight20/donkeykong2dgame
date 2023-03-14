@@ -8,6 +8,8 @@ public class DonkeyKongController : MonoBehaviour
     public Transform throwPoint;
     public GameObject barrelPrefab;
 
+    public bool testThrowing = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +19,12 @@ public class DonkeyKongController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("dk_throw"))
-        {
-            animator.SetTrigger("throw");
+        if(testThrowing){
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("dk_throw")){
+                animator.SetTrigger("throw");
+            }
         }
+        
     }
 
     public void ThrowBarrel()

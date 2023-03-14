@@ -56,9 +56,9 @@ public class PlayerController : MonoBehaviour
                 }
                 if (isClimbing)
                 {
-                    player.velocity = Vector2.zero;
-                    // player.isKinematic = true;
-                    player.gravityScale = 0;
+                    // player.velocity = Vector2.zero;
+                    player.isKinematic = true;
+                    // player.gravityScale = 0;
                     movement.y = verticalInput * moveSpeed;
                     if (!grounded)
                     {
@@ -70,8 +70,8 @@ public class PlayerController : MonoBehaviour
             }
             if (!isClimbing)
             {
-                // player.isKinematic = false;
-                player.gravityScale = 0.9f;
+                player.isKinematic = false;
+                // player.gravityScale = 0.9f;
             }
 
 
