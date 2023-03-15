@@ -8,6 +8,9 @@ TagManager:
   - Ladder
   - Bound
   - Barrel
+  - LadderTop
+  - LadderBottom
+  - LadderFall
   layers:
   - Default
   - TransparentFX

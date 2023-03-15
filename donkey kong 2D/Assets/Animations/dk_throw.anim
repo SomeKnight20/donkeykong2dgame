@@ -21,7 +21,9 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 429506417, guid: 39576e328e6c80b41b777f656ba034e4, type: 3}
-    - time: 0.25
+    - time: 0.16666667
+      value: {fileID: 2140872891, guid: 39576e328e6c80b41b777f656ba034e4, type: 3}
+    - time: 0.33333334
       value: {fileID: -256561602, guid: 39576e328e6c80b41b777f656ba034e4, type: 3}
     - time: 0.5
       value: {fileID: -256561602, guid: 39576e328e6c80b41b777f656ba034e4, type: 3}
@@ -45,6 +47,7 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 429506417, guid: 39576e328e6c80b41b777f656ba034e4, type: 3}
+    - {fileID: 2140872891, guid: 39576e328e6c80b41b777f656ba034e4, type: 3}
     - {fileID: -256561602, guid: 39576e328e6c80b41b777f656ba034e4, type: 3}
     - {fileID: -256561602, guid: 39576e328e6c80b41b777f656ba034e4, type: 3}
   m_AnimationClipSettings:
@@ -72,7 +75,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.25
+  - time: 0.33333334
     functionName: ThrowBarrel
     data: 
     objectReferenceParameter: {fileID: 0}
