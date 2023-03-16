@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 484486652976305177}
   - component: {fileID: 484486652976305181}
   - component: {fileID: 484486652976305178}
+  - component: {fileID: 8325163949629040678}
   - component: {fileID: 2534691905527660107}
-  - component: {fileID: 1895396215068691602}
   - component: {fileID: 2127201926}
   m_Layer: 8
   m_Name: player
@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e972043ba5376eb4b97eeb34b444a581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   gameManager: {fileID: 3673515550373271757, guid: 3a6e11bfab1b1ca4bb44d024ec8c7c1c, type: 3}
   animator: {fileID: 858407002853609399}
   moveSpeed: 4
@@ -74,6 +77,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!61 &8325163949629040678
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484486652976305176}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!70 &2534691905527660107
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -90,22 +119,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.1}
   m_Size: {x: 1, y: 1.2}
   m_Direction: 0
---- !u!58 &1895396215068691602
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484486652976305176}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1}
-  serializedVersion: 2
-  m_Radius: 0.6
 --- !u!61 &2127201926
 BoxCollider2D:
   m_ObjectHideFlags: 0

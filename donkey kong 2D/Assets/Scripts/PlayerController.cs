@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private LayerMask groundLayerMask;
+
     public GameManager gameManager;
     public Animator animator;
 
     private Rigidbody2D player;
+    private BoxCollider2D boxCollider2D;
     public float moveSpeed;
     public float jumpForce;
 
@@ -26,9 +29,10 @@ public class PlayerController : MonoBehaviour
     private Transform ladder;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         player = GetComponent<Rigidbody2D>();
+        boxCollider2D = transform.GetComponent<BoxCollider2D>();
         playerHeight = animator.GetComponent<SpriteRenderer>().size.y;
     }
 
@@ -133,6 +137,13 @@ public class PlayerController : MonoBehaviour
         isDead = true;
         Destroy(player);
         gameManager.Lose();
+    }
+
+    private bool IsGrounded()
+    {
+        float extraHeight = .05f;
+        RaycastHit2D raycasthit = Physics2D.BoxCast(boxCollider2D.bounds.center - new Vector3(0, boxCollider2D.bounds.extents.y), boxCollider2D.bounds.extents, 0f, Vector2.down, extraHeight, groundLayerMask);
+        return raycasthit.collider != null;
     }
 
     void OnTriggerStay2D(Collider2D collision)

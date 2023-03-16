@@ -62,6 +62,10 @@ public class BarrelController : MonoBehaviour
         {
             isGoingRight = !isGoingRight;
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerController>().GameOver();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision){
