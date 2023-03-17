@@ -10,6 +10,8 @@ public class DonkeyKongController : MonoBehaviour
 
     public bool testThrowing = false;
 
+    public float timer = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +22,15 @@ public class DonkeyKongController : MonoBehaviour
     void Update()
     {
         if(testThrowing){
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("dk_throw")){
-                animator.SetTrigger("throw");
+            timer += Time.deltaTime;
+
+            if (timer > 3.0f)
+            {
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("dk_throw"))
+                {
+                    timer = 0f;
+                    animator.SetTrigger("throw");
+                }
             }
         }
         
