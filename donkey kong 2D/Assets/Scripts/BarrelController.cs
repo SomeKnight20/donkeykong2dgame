@@ -66,22 +66,24 @@ public class BarrelController : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerController>().GameOver();
         }
+ 
     }
 
     void OnTriggerEnter2D(Collider2D collision){
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.GetComponent<PlayerController>().GameOver();
-        }
         if (collision.gameObject.CompareTag("LadderTop") && Random.Range(0, 3) == 0)
         {
             isFalling = true;
             barrel.position = new Vector2(collision.transform.position.x, barrel.position.y);
             // Debug.Log("Hit ladder");
         }
-        if (collision.gameObject.CompareTag("LadderBottom"))
+        if (isFalling)
         {
-            if(isFalling){
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<PlayerController>().GameOver();
+            }
+            if (collision.gameObject.CompareTag("LadderBottom"))
+            {
                 isGoingRight = !isGoingRight;
                 isFalling = false;
                 barrel.isKinematic = false;
