@@ -20,6 +20,7 @@ public class Hammer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<PlayerController>().GetHammer();
             Destroy(gameObject);
         }
     }

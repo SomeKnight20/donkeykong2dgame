@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    // private float timer = 0f;
+    private bool holdingHammer = false;
+
 
     private Transform ladder;
 
@@ -133,18 +136,20 @@ public class PlayerController : MonoBehaviour
         //player.MovePosition(player.position + movement * Time.fixedDeltaTime);
     }
 
+
+    public void GetHammer(){
+        holdingHammer = true;
+    }
     public void GameOver(){
         isDead = true;
         Destroy(player);
         gameManager.Lose();
     }
 
-    private bool IsGrounded()
-    {
-        float extraHeight = .05f;
-        RaycastHit2D raycasthit = Physics2D.BoxCast(boxCollider2D.bounds.center - new Vector3(0, boxCollider2D.bounds.extents.y), boxCollider2D.bounds.extents, 0f, Vector2.down, extraHeight, groundLayerMask);
-        return raycasthit.collider != null;
-    }
+    // private bool IsGrounded()
+    // {
+    //     return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayerMask);
+    // }
 
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -170,13 +175,4 @@ public class PlayerController : MonoBehaviour
             // isClimbing = false;
         }
     }
-    // void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Barrel"))
-    //     {
-    //         isDead = true;
-    //         Destroy(player);
-    //         gameManager.Lose();
-    //     }
-    // }
 }

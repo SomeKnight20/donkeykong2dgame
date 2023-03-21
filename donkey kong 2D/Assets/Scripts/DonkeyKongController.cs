@@ -22,15 +22,14 @@ public class DonkeyKongController : MonoBehaviour
     void Update()
     {
         if(testThrowing){
-            timer += Time.deltaTime;
-
-            if (timer > 3.0f)
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("dk_throw"))
             {
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("dk_throw"))
-                {
-                    timer = 0f;
-                    animator.SetTrigger("throw");
-                }
+                timer += Time.deltaTime;
+            }
+            if (timer > 1.0f)
+            {
+                timer = 0f;
+                animator.SetTrigger("throw");
             }
         }
         
