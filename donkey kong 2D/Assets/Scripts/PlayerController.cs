@@ -53,7 +53,8 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown("space")
                 && grounded
-                && !isClimbing)
+                && !isClimbing
+                && !holdingHammer)
             {
                 player.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
             
             movement.y = 0;
-            if (canClimb){
+            if (canClimb && !holdingHammer){
                 if (verticalInput != 0 && grounded){
                     isClimbing = true;
                     horizontalInput = 0;
@@ -122,6 +123,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("speed", Mathf.Abs(horizontalInput));
             animator.SetBool("isClimbing", isClimbing);
             animator.SetBool("grounded", grounded);
+            animator.SetBool("isHoldingHammer", holdingHammer);
         }
         animator.SetBool("isDead", isDead);
     }
@@ -141,9 +143,11 @@ public class PlayerController : MonoBehaviour
         holdingHammer = true;
     }
     public void GameOver(){
-        isDead = true;
-        Destroy(player);
-        gameManager.Lose();
+        if(!holdingHammer){
+            isDead = true;
+            Destroy(player);
+            gameManager.Lose();
+        }
     }
 
     // private bool IsGrounded()

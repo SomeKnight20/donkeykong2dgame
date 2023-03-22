@@ -56,6 +56,10 @@ public class BarrelController : MonoBehaviour
         barrel.position += movement * Time.fixedDeltaTime;
     }
 
+    public void DestroyBarrel(){
+        Destroy(gameObject);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bound"))
