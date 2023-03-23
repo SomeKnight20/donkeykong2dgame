@@ -22,10 +22,11 @@ public class GameManager : MonoBehaviour
     public void Win()
     {
         Debug.Log("Victory");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Lose()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Game over");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

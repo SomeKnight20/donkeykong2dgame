@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    // private float timer = 0f;
+    private float timer = 0f;
     private bool holdingHammer = false;
 
 
@@ -44,6 +44,15 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDead)
         {
+            if (holdingHammer)
+            {
+                timer += Time.deltaTime;
+                if (timer > 5.0f)
+                {
+                    timer = 0f;
+                    holdingHammer = false;
+                }
+            }
             if (grounded)
             {
                 horizontalInput = Input.GetAxisRaw("Horizontal");
