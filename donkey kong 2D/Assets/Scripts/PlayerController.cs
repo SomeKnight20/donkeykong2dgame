@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
     private Rigidbody2D player;
-    private BoxCollider2D boxCollider2D;
+    public GameObject hammerHitbox;
     public float moveSpeed;
     public float jumpForce;
 
@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         player = GetComponent<Rigidbody2D>();
-        boxCollider2D = transform.GetComponent<BoxCollider2D>();
         playerHeight = animator.GetComponent<SpriteRenderer>().size.y;
+        hammerHitbox.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
                 if (timer > 5.0f)
                 {
                     timer = 0f;
+                    hammerHitbox.SetActive(false);
                     holdingHammer = false;
                 }
             }
@@ -149,6 +150,7 @@ public class PlayerController : MonoBehaviour
 
 
     public void GetHammer(){
+        hammerHitbox.SetActive(true);
         holdingHammer = true;
     }
     public void GameOver(){
@@ -187,5 +189,16 @@ public class PlayerController : MonoBehaviour
             canClimb = false;
             // isClimbing = false;
         }
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (holdingHammer)
+        {
+            if (collision.gameObject.CompareTag("Barrel"))
+            {
+                collision.gameObject.GetComponent<BarrelController>().DestroyBarrel();
+            }
+        }
+        
     }
 }
