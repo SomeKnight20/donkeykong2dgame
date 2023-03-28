@@ -95,31 +95,12 @@ public class PlayerController : MonoBehaviour
                     player.position = new Vector2(ladder.transform.position.x, player.position.y);
                     transform.localScale = new Vector3(Mathf.Round(Mathf.Abs(player.position.y) % 1) * 2 - 1, 1, 1);
                 }else{
-                    // Debug.Log("Test");
                     isClimbing = false;
                 }
             }else{
                 player.isKinematic = false;
             }
             movement.x = horizontalInput * moveSpeed;
-            // if (canClimb)
-            // {
-            //     if (verticalInput != 0 && grounded)
-            //     {
-            //         isClimbing = true;
-            //     }
-            //     if (isClimbing)
-            //     {
-            //         player.isKinematic = true;
-            //         movement.y = verticalInput * moveSpeed;
-            //         if (!grounded)
-            //         {
-            //             movement.x = 0;
-            //             horizontalInput = 0;
-            //         }
-            //         transform.localScale = new Vector3(Mathf.Round(Mathf.Abs(player.position.y) % 1) * 2 - 1, 1, 1);
-            //     }
-            // }
 
 
             if (horizontalInput > 0)
