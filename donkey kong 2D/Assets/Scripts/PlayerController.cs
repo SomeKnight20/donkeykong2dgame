@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
             if (holdingHammer)
             {
                 timer += Time.deltaTime;
-                if (timer > 5.0f)
+                if (timer > 6.0f)
                 {
                     timer = 0f;
                     hammerHitbox.SetActive(false);
@@ -73,22 +73,19 @@ public class PlayerController : MonoBehaviour
             
             movement.y = 0;
             if (canClimb && !holdingHammer){
-                if (verticalInput != 0 && grounded){
+                if (verticalInput != 0 && grounded && horizontalInput == 0){
                     isClimbing = true;
                     horizontalInput = 0;
                 }
             }else{
                 isClimbing = false;
             }
+            if(horizontalInput != 0){
+                isClimbing = false;
+            }
             if (isClimbing){
-                if(player.position.y < ladder.transform.GetChild(1).transform.position.y+playerHeight/2 
-                || player.position.y > ladder.transform.GetChild(0).transform.position.y-playerHeight/2){
-                    if(horizontalInput != 0){
-                        isClimbing = false;
-                    }
-                }
                 if (player.position.y <= ladder.transform.GetChild(0).transform.position.y+playerHeight/2
-                && player.position.y >= ladder.transform.GetChild(1).transform.position.y){
+                && player.position.y >= ladder.transform.GetChild(1).transform.position.y+playerHeight/2){
                     player.velocity = Vector2.zero;
                     player.isKinematic = true;
                     movement.y = verticalInput * moveSpeed;
@@ -125,8 +122,6 @@ public class PlayerController : MonoBehaviour
         {
             player.position += movement * Time.fixedDeltaTime;
         }
-        
-        //player.MovePosition(player.position + movement * Time.fixedDeltaTime);
     }
 
 
@@ -168,7 +163,6 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ladder"))
         {
             canClimb = false;
-            // isClimbing = false;
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
@@ -178,6 +172,10 @@ public class PlayerController : MonoBehaviour
             if (collision.gameObject.CompareTag("Barrel"))
             {
                 collision.gameObject.GetComponent<BarrelController>().DestroyBarrel();
+            }
+            if (collision.gameObject.CompareTag("Fire"))
+            {
+                collision.gameObject.GetComponent<FireController>().DestroyFire();
             }
         }
         

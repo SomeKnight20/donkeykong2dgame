@@ -70,7 +70,6 @@ public class BarrelController : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerController>().GameOver();
         }
- 
     }
 
     void OnTriggerEnter2D(Collider2D collision){
