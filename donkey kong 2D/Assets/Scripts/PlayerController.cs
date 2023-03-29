@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    public float hammerTime = 6f;
     private float timer = 0f;
     private bool holdingHammer = false;
 
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        timer = hammerTime;
         player = GetComponent<Rigidbody2D>();
         playerHeight = animator.GetComponent<SpriteRenderer>().size.y;
         hammerHitbox.SetActive(false);
@@ -46,13 +48,14 @@ public class PlayerController : MonoBehaviour
         {
             if (holdingHammer)
             {
-                timer += Time.deltaTime;
-                if (timer > 6.0f)
+                timer -= Time.deltaTime;
+                if (timer < 0)
                 {
-                    timer = 0f;
+                    timer = hammerTime;
                     hammerHitbox.SetActive(false);
                     holdingHammer = false;
                 }
+                animator.SetFloat("hammerTimer", timer);
             }
             if (grounded)
             {
@@ -128,19 +131,18 @@ public class PlayerController : MonoBehaviour
     public void GetHammer(){
         hammerHitbox.SetActive(true);
         holdingHammer = true;
+        animator.SetTrigger("holdHammer");
     }
     public void GameOver(){
         if(!holdingHammer){
             isDead = true;
             Destroy(player);
-            gameManager.Lose();
+            // gameManager.Lose();
         }
     }
-
-    // private bool IsGrounded()
-    // {
-    //     return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayerMask);
-    // }
+    public void EndGame(){
+        gameManager.Lose();
+    }
 
     void OnTriggerStay2D(Collider2D collision)
     {

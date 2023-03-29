@@ -19,14 +19,17 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void ResetLevel(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void Win()
     {
         Debug.Log("Victory");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ResetLevel();
     }
     public void Lose()
     {
         Debug.Log("Game over");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ResetLevel();
     }
 }
