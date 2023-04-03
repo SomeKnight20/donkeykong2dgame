@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
+    public GameManager gameManager;
     private Rigidbody2D player;
+
+    public GameObject hammerHitbox;
 
     float horizontalInput;
     float verticalInput;
@@ -17,14 +20,22 @@ public class PlayerController : MonoBehaviour
     private bool grounded;
     private bool canClimb = false;
     private bool isClimbing = false;
+    private bool isDead = false;
 
     private Transform ladder;
     private float playerHeight;
 
 
+    public float hammerTime = 6f;
+    private float timer = 0f;
+    private bool holdingHammer = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        timer = hammerTime;
+        hammerHitbox.SetActive(false);
         player = GetComponent<Rigidbody2D>();
         playerHeight = GetComponent<SpriteRenderer>().size.y;
     }
@@ -32,40 +43,53 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (holdingHammer)
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                timer = hammerTime;
+                hammerHitbox.SetActive(false);
+                holdingHammer = false;
+            }
+            animator.SetFloat("hammerTimer", timer);
+        }
         if (grounded){
             horizontalInput = Input.GetAxisRaw("Horizontal");
         }
-        verticalInput = Input.GetAxisRaw("Vertical");
+        if(!holdingHammer){
+            verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown("space") && grounded && !isClimbing){
-            player.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
-
-        movement.y = 0;
-        if (canClimb){
-            if (verticalInput != 0 && grounded && horizontalInput == 0){
-                isClimbing = true;
+            if (Input.GetKeyDown("space") && grounded && !isClimbing){
+                player.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
-        }else{
-            isClimbing = false;
-        }
-        if(horizontalInput != 0){
-            isClimbing = false;
-        }
 
-        if (isClimbing){
-            if (player.position.y <= ladder.transform.GetChild(0).transform.position.y+playerHeight/2
-                && player.position.y >= ladder.transform.GetChild(1).transform.position.y-0.1f){
-                player.velocity = Vector2.zero;
-                player.isKinematic = true;
-                movement.y = verticalInput * moveSpeed;
-                player.position = new Vector2(ladder.transform.position.x, player.position.y);
-                transform.localScale = new Vector3(Mathf.Round(Mathf.Abs(player.position.y) % 1) * 2 - 1, 1, 1);
+            movement.y = 0;
+            if (canClimb){
+                if (verticalInput != 0 && grounded && horizontalInput == 0){
+                    isClimbing = true;
+                }
             }else{
                 isClimbing = false;
             }
-        }else{
-            player.isKinematic = false;
+            if(horizontalInput != 0){
+                isClimbing = false;
+            }
+
+            if (isClimbing){
+                if (player.position.y <= ladder.transform.GetChild(0).transform.position.y+playerHeight/2
+                    && player.position.y >= ladder.transform.GetChild(1).transform.position.y-0.1f){
+                    player.velocity = Vector2.zero;
+                    player.isKinematic = true;
+                    movement.y = verticalInput * moveSpeed;
+                    player.position = new Vector2(ladder.transform.position.x, player.position.y);
+                    transform.localScale = new Vector3(Mathf.Round(Mathf.Abs(player.position.y) % 1) * 2 - 1, 1, 1);
+                }else{
+                    isClimbing = false;
+                }
+            }else{
+                player.isKinematic = false;
+            }
         }
 
         if (horizontalInput > 0){
@@ -74,6 +98,7 @@ public class PlayerController : MonoBehaviour
         else if (horizontalInput < 0){
             transform.localScale = new Vector3(-1, 1, 1);
         }
+        
 
         movement.x = horizontalInput * moveSpeed;
 
@@ -84,7 +109,23 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        player.position += movement * Time.fixedDeltaTime;
+        if(!isDead){
+            player.position += movement * Time.fixedDeltaTime;
+        }
+    }
+    public void GetHammer(){
+        hammerHitbox.SetActive(true);
+        holdingHammer = true;
+        animator.SetTrigger("holdHammer");
+    }
+    public void GameOver(){
+        if(!isDead && !holdingHammer){
+            isDead = true;
+            animator.SetTrigger("gameOver");
+        }
+    }
+    public void EndGame(){
+        gameManager.Lose();
     }
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -107,6 +148,17 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ladder"))
         {
             canClimb = false;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (holdingHammer)
+        {
+            if (collision.gameObject.CompareTag("Barrel"))
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
 }
