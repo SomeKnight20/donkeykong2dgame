@@ -435,7 +435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3864422719605825074, guid: 13789a713fada3e418e523bccf525923, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.38
+      value: 2.495
       objectReference: {fileID: 0}
     - target: {fileID: 3927914684846900207, guid: 13789a713fada3e418e523bccf525923, type: 3}
       propertyPath: m_RootOrder
@@ -762,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3864422719605825074, guid: 13789a713fada3e418e523bccf525923, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.92
+      value: 2.116
       objectReference: {fileID: 0}
     - target: {fileID: 3927914684846900207, guid: 13789a713fada3e418e523bccf525923, type: 3}
       propertyPath: m_RootOrder
@@ -964,8 +964,12 @@ PrefabInstance:
       value: -0.97
       objectReference: {fileID: 0}
     - target: {fileID: 3864422719605825074, guid: 13789a713fada3e418e523bccf525923, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3864422719605825074, guid: 13789a713fada3e418e523bccf525923, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.98
+      value: 2.131
       objectReference: {fileID: 0}
     - target: {fileID: 3927914684846900207, guid: 13789a713fada3e418e523bccf525923, type: 3}
       propertyPath: m_RootOrder
@@ -1298,7 +1302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8125788187570602020, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3.551043
+      value: 3.4369793
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
@@ -1438,7 +1442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8125788187570602020, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3.593918
+      value: 3.49819
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
@@ -1775,8 +1779,12 @@ PrefabInstance:
       value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 3864422719605825074, guid: 13789a713fada3e418e523bccf525923, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3864422719605825074, guid: 13789a713fada3e418e523bccf525923, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.29
+      value: 1.501
       objectReference: {fileID: 0}
     - target: {fileID: 3927914684846900207, guid: 13789a713fada3e418e523bccf525923, type: 3}
       propertyPath: m_RootOrder
@@ -2091,7 +2099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8125788187570602020, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3.076865
+      value: 2.9713492
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
@@ -2161,7 +2169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8125788187570602020, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3.5024152
+      value: 3.3529346
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
@@ -2231,7 +2239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8125788187570602020, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3.1651711
+      value: 3.0679145
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57b8fc59701eeac4cbdd91e5f139fe9b, type: 3}

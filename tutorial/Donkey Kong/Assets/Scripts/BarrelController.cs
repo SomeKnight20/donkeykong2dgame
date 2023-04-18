@@ -42,6 +42,8 @@ public class BarrelController : MonoBehaviour
         }else{
             movement.x = horizontalDir * moveSpeed;
         }
+
+        animator.SetBool("falling", isFalling);
     }
 
     void FixedUpdate()
@@ -58,6 +60,27 @@ public class BarrelController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerController>().GameOver();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision){
+        if (collision.gameObject.CompareTag("LadderTop") && Random.Range(0, 3) == 0)
+        {
+            isFalling = true;
+            barrel.position = new Vector2(collision.transform.position.x, barrel.position.y);
+        }
+        if (isFalling)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<PlayerController>().GameOver();
+            }
+            if (collision.gameObject.CompareTag("LadderBottom"))
+            {
+                isGoingRight = !isGoingRight;
+                isFalling = false;
+                barrel.isKinematic = false;
+            }
         }
     }
 }
